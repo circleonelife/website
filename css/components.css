@@ -1,0 +1,653 @@
+/* ======================================================
+  COMPONENTS CSS – FINAL PRO VERSION
+  Reusable UI blocks (Header, Nav, Layout, Cards, Footer)
+  Author: Amit Ku Yadav
+  Sections: header | nav | brand | cards | footer | utilities
+====================================================== */
+
+/* ======================================================
+   GLOBAL LINK RESET
+====================================================== */
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ======================================================
+   TYPOGRAPHY
+====================================================== */
+
+.nav-list a {
+  font-size: 0.75rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.life-card h2,
+.blog-card h2,
+.service-card h2 {
+  letter-spacing: -0.3px;
+}
+
+.life-card p,
+.blog-card p,
+.service-card p,
+.connect-card p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.footer-text,
+.footer-right {
+  line-height: 1.6;
+}
+
+/* ======================================================
+   HEADER
+====================================================== */
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  width: 100%;
+  z-index: 1000;
+  backdrop-filter: blur(18px) saturate(160%);
+  transition: background 0.3s ease, border 0.3s ease;
+}
+.site-header.scrolled {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+body.theme-dark .site-header {
+  background: rgba(0,0,0,0.6);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+body.theme-light .site-header {
+  background: rgba(255,255,255,0.85);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.header-inner {
+  max-width: var(--container);
+  margin: auto;
+  padding: var(--space-sm) 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Mobile header spacing compensation */
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 140px;
+  }
+  .site-header {
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease;
+    will-change: transform;
+  }
+
+  .site-header.hide {
+    transform: translateY(-110%);
+    opacity: 0.98;
+  }
+}
+
+/* ======================================================
+   BRAND
+====================================================== */
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.brand-name {
+  font-weight: 600;
+  line-height: 1.1;
+  text-transform: none; /* preserve author-provided capitalization */
+}
+
+.brand-tagline {
+  font-size: 0.75rem;
+  color: var(--gray);
+  opacity: 0.7;
+}
+
+/* ======================================================
+   NAVIGATION
+====================================================== */
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list a {
+  opacity: 0.75;
+  transition: opacity 0.25s ease, color 0.25s ease;
+}
+
+.nav-list a:hover,
+.nav-list a.active {
+  opacity: 1;
+  color: var(--brand-green);
+}
+
+.nav-list a.active {
+  border-bottom: 2px solid var(--brand-green);
+  padding-bottom: 4px;
+}
+
+/* ======================================================
+   HEADER AUTH BUTTONS
+====================================================== */
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Login Button */
+
+.btn-login {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--gray);
+  transition: all 0.25s ease;
+}
+
+.btn-login:hover {
+  border-color: var(--brand-green);
+  color: var(--brand-green);
+}
+
+/* Sign Up Button */
+
+.btn-signup {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: linear-gradient(
+    135deg,
+    var(--brand-green),
+    var(--brand-orange)
+  );
+  color: #fff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-signup:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* ======================================================
+   MAIN LAYOUT
+====================================================== */
+
+.site-main {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ======================================================
+   GRID SYSTEM
+====================================================== */
+
+.life-grid,
+.blog-grid,
+.services-grid,
+.connect-grid,
+.contact-actions {
+  display: grid;
+  gap: 32px;
+  padding: var(--space-lg) 0;
+}
+
+.life-grid,
+.blog-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.services-grid,
+.connect-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* ======================================================
+   CARD SYSTEM – UNIFIED
+====================================================== */
+
+.life-card,
+.blog-card,
+.service-card,
+.connect-card,
+.action-card {
+  position: relative;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border-radius: calc(var(--radius) + 4px);
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Theme surfaces */
+
+body.theme-dark .life-card,
+body.theme-dark .blog-card,
+body.theme-dark .service-card,
+body.theme-dark .connect-card,
+body.theme-dark .action-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--card-border-dark);
+  box-shadow: var(--card-shadow-dark);
+}
+
+body.theme-light .life-card,
+body.theme-light .blog-card,
+body.theme-light .service-card,
+body.theme-light .connect-card,
+body.theme-light .action-card {
+  background: #fff;
+  border: 1px solid var(--card-border-light);
+  box-shadow: var(--card-shadow-light);
+}
+
+/* Decorative overlays */
+
+.life-card::before,
+.blog-card::before,
+.service-card::before,
+.connect-card::before,
+.action-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    120% 120% at top left,
+    rgba(4,106,56,0.18),
+    transparent 60%
+  );
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.life-card::after,
+.blog-card::after,
+.service-card::after,
+.connect-card::after,
+.action-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(
+    180deg,
+    var(--brand-green),
+    var(--brand-orange)
+  );
+  opacity: 0.85;
+}
+
+/* Hover effect */
+
+.life-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+}
+.life-card:focus-visible {
+  outline: 2px solid var(--brand-green);
+  outline-offset: 4px;
+}
+.blog-card:hover,
+.service-card:hover,
+.connect-card:hover,
+.action-card:hover {
+  transform: translateY(-6px) scale(1.01);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .life-card:hover,
+  .blog-card:hover,
+  .service-card:hover,
+  .connect-card:hover,
+  .action-card:hover {
+    transform: none;
+  }
+}
+
+/* ======================================================
+   FOOTER
+====================================================== */
+
+.site-footer {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+}
+
+body.theme-dark .site-footer {
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+body.theme-light .site-footer {
+  border-top: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.85);
+}
+
+.footer-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 48px;
+}
+
+.footer-title {
+  font-size: 0.85rem;
+  font-weight: 1000;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.footer-text {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--gray);
+}
+
+.social-icons {
+  margin-top: 16px;
+  display: flex;
+  gap: 16px;
+}
+
+.social-icons img {
+  width: 22px;
+  height: 22px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.social-icons img:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.footer-right {
+  text-align: right;
+  font-size: 0.8rem;
+  color: var(--gray);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-right .theme-toggle {
+  margin-top: 12px;
+  align-self: flex-end;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Bottom */
+
+.footer-bottom {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.7rem;
+  color: var(--gray);
+  opacity: 0.6;
+}
+
+/* ======================================================
+   MOBILE SYSTEM
+====================================================== */
+
+@media (max-width: 768px) {
+
+  .header-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .brand-link {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  .brand-name {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .brand-tagline {
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+
+  .brand-text {
+    align-items: center;
+    text-align: center;
+  }
+
+  .nav-list {
+    justify-content: center;
+    gap: 18px;
+    padding-top: 6px;
+  }
+
+  .nav-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .auth-buttons {
+  justify-content: center;
+  }
+
+  .life-grid,
+  .blog-grid,
+  .services-grid,
+  .connect-grid,
+  .contact-actions {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .life-card,
+  .blog-card,
+  .service-card,
+  .connect-card,
+  .action-card {
+    padding: 24px 20px;
+    border-radius: 22px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-right {
+    text-align: left;
+  }
+
+  .footer-right .theme-toggle {
+    align-self: flex-start;
+  }
+}
+
+/* ======================================================
+   GLOBAL FIRST SECTION SPACING
+====================================================== */
+
+.home-intro,
+.page-intro {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+/* ======================================================
+   BUTTON SYSTEM
+====================================================== */
+
+.btn-primary {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  background: linear-gradient(
+    135deg,
+    var(--brand-green),
+    var(--brand-orange)
+  );
+  color: #fff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--brand-green);
+  outline-offset: 4px;
+}
+.read-more.disabled {
+  opacity: 0.6;
+  cursor: default;
+  pointer-events: none;
+}
+/* ======================================================
+   AUTH PAGES – PROFESSIONAL DESIGN
+====================================================== */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 48px 40px;
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.auth-card h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-form label {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.auth-form input {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--card-border-light);
+  background: transparent;
+  color: inherit;
+  font-size: 0.9rem;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: var(--brand-green);
+}
+
+.auth-btn {
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  background: linear-gradient(
+    135deg,
+    var(--brand-green),
+    var(--brand-orange)
+  );
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.auth-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+.auth-switch {
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.auth-switch a {
+  color: var(--brand-green);
+  font-weight: 600;
+}

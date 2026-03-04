@@ -1,0 +1,269 @@
+/* ======================================================
+  BASE CSS
+  Global foundation styles
+  Author: Amit Ku Yadav
+  Sections: design tokens | reset | typography | utilities | themes
+====================================================== */
+html {
+  scroll-behavior: smooth;
+}
+/* ======================================================
+   DESIGN TOKENS
+====================================================== */
+
+:root {
+  --container: 1100px;
+
+  --text-primary: #111;
+  --text-secondary: #444;
+  --text-muted: #666;
+
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 24px;
+  --space-lg: 48px;
+  --space-xl: 80px;
+
+  --radius: 18px;
+  --blur: 18px;
+
+  --gray: #bdbdbd;
+  --text-dark: #111;
+  --text-light: #e5e5e5;
+
+  --card-border-dark: rgba(255,255,255,0.14);
+  --card-border-light: rgba(0,0,0,0.12);
+
+  --card-shadow-dark: 0 10px 30px rgba(0,0,0,0.45);
+  --card-shadow-light: 0 10px 30px rgba(0,0,0,0.08);
+
+  --brand-green: #046A38;
+  --brand-orange: #FF671F;
+  --brand-blue: #000080;
+}
+
+/* Accent Text */
+.accent {
+  color: var(--brand-green);
+}
+
+.theme-light .accent {
+  color: var(--brand-green);
+}
+
+/* Hero Labels */
+.hero-label {
+  color: var(--brand-green);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 24px;
+}
+
+.theme-light .hero-label {
+  color: var(--brand-green);
+  opacity: 1;
+}
+
+/* Hero description (shared) */
+.hero-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-width: 580px;
+  opacity: 0.85;
+  margin-bottom: 40px;
+}
+
+/* ======================================================
+   RESET
+====================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  background: var(--brand-green);
+  color: #fff;
+}
+
+/* ======================================================
+   BODY & THEME
+====================================================== */
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  font-size: 15px;              /* Pro baseline */
+  line-height: 1.7;             /* Reading comfort */
+  letter-spacing: 0.1px;        /* Subtle clarity */
+
+  min-height: 100vh;
+  padding-top: 96px;
+}
+
+body.theme-dark {
+  background: #000;
+  color: var(--text-light);
+}
+
+body.theme-light {
+  background: #fff;
+  color: var(--text-dark);
+}
+
+/* Theme-aware card variables for components to consume */
+body.theme-dark {
+  --card-bg: #1c1c1e;
+  --card-border: var(--card-border-dark);
+  --card-shadow: var(--card-shadow-dark);
+  --card-text: var(--text-light);
+}
+
+body.theme-light {
+  --card-bg: #ffffff;
+  --card-border: var(--card-border-light);
+  --card-shadow: var(--card-shadow-light);
+  --card-text: var(--text-dark);
+}
+
+/* ======================================================
+   TYPOGRAPHY – HEADINGS
+====================================================== */
+
+h1, h2, h3 {
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+h1 {
+  font-size: clamp(2rem, 3.5vw, 2.6rem);
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 1.3rem;
+  line-height: 1.35;
+}
+
+h3 {
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
+/* ======================================================
+   TYPOGRAPHY – BODY TEXT
+====================================================== */
+
+p {
+  margin-bottom: 0.75em;
+  color: var(--text-muted);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* ======================================================
+   ACCESSIBILITY
+====================================================== */
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: #000;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+
+/* ======================================================
+   GLASS UTILITY
+====================================================== */
+
+.glass {
+  backdrop-filter: blur(var(--blur)) saturate(160%);
+  border-radius: var(--radius);
+}
+
+body.theme-dark .glass {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Adds depth */
+}
+
+body.theme-light .glass {
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(0,0,0,0.12);
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14.5px;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+  }
+}
+
+/* ======================================================
+   LIGHT THEME – GLOBAL TEXT CONTRAST FIX (FINAL)
+====================================================== */
+
+body.theme-light {
+  --text-primary: #111;
+  --text-secondary: #333;
+  --text-muted: #555;
+}
+
+/* Override gray usage in light theme */
+body.theme-light p {
+  color: var(--text-secondary);
+}
+
+body.theme-light .footer-text,
+body.theme-light .footer-right,
+body.theme-light .footer-bottom,
+body.theme-light span,
+body.theme-light li {
+  color: var(--text-muted);
+}
+/* ======================================================
+   PAGE LOAD FADE
+====================================================== */
+
+body {
+  animation: fadeIn 0.35s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+html, body {
+  overflow-x: hidden;
+}
